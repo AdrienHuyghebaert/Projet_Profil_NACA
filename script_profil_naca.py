@@ -30,8 +30,10 @@ def entrees_utilisateur():
 
     while True:
         try:
-            corde = float(input("\nVeuillez rentrer la corde de votre profil (en chiffres) :\n"))
-            break
+            corde = float(input("\nVeuillez rentrer la valeur corde de votre profil (en chiffre) :\n"))
+            unite_corde = str(input("\nVeuillez rentrer son unité (exemple : ft ou m) :\n"))
+            if isinstance(corde, float) and isinstance(unite_corde, str):
+                break
         except ValueError:
             print("Le format n'est pas bon. Veuillez réessayer.")
 
@@ -55,7 +57,7 @@ def entrees_utilisateur():
         else:
             print("Rentrée invalide. Veuillez réessayer.")
 
-    return type_de_profil, corde, nombre_points, distribution
+    return type_de_profil, corde, unite_corde, nombre_points, distribution
 
 
 # ================================================================================================
@@ -90,15 +92,25 @@ def creer_tableaux_extrados_intrados(corde, t, x_c):
 # Fonction qui affiche les informations relatives au profil :
 # nom du profil, épaisseur maximale et position selon la corde.
 
-def afficher_informations_profil(type_de_profil):
-    print(f"")
+def afficher_informations_profil(type_de_profil, corde, unite_corde, tableau_extrados):
+    # Recherche de la position x de l'épaisseur maximale du profil en pourcentage de corde.
+    index_epaisseur_max = np.argmax(tableau_extrados[:, 1])
+    x_epaisseur_max = tableau_extrados[index_epaisseur_max, 0]
+    y_epaisseur_max = tableau_extrados[index_epaisseur_max, 1]
+
+    # Affichage des informations.
+    print("\n\n\n\n\n\n")
+    print(f"\nVotre profil : {type_de_profil}")
+    print(f"La corde de votre profil : {corde}{unite_corde}")
+    print(f"L'épaisseur maximale du profil est de {y_epaisseur_max:.2f}{unite_corde} à"
+          f" {x_epaisseur_max / corde * 100:.2f}% de la corde.")
 
 
 # ================================================================================================
 # Fonction principale
 
 def profil_naca():
-    type_de_profil, corde, nombre_points, distribution = entrees_utilisateur()
+    type_de_profil, corde, unite_corde, nombre_points, distribution = entrees_utilisateur()
 
     # Récupération des deux derniers chiffres du profil NACA
     # qui correspondent à l'épaisseur maximale du profil.
@@ -111,6 +123,8 @@ def profil_naca():
         x_c = np.linspace(0, 1, nombre_points)
 
     tableau_extrados, tableau_intrados = creer_tableaux_extrados_intrados(corde, t, x_c)
+
+    afficher_informations_profil(type_de_profil, corde, unite_corde, tableau_extrados)
 
 
 # ================================================================================================
