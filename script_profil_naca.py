@@ -30,7 +30,7 @@ def entrees_utilisateur():
 
     while True:
         try:
-            corde = float(input("\nVeuillez rentrer la valeur corde de votre profil (en chiffre) :\n"))
+            corde = float(input("\nVeuillez rentrer la valeur de la corde de votre profil (en chiffre) :\n"))
             unite_corde = str(input("\nVeuillez rentrer son unité (exemple : ft ou m) :\n"))
             if isinstance(corde, float) and isinstance(unite_corde, str):
                 break
@@ -105,6 +105,40 @@ def afficher_informations_profil(type_de_profil, corde, unite_corde, tableau_ext
     print(f"L'épaisseur maximale du profil est de {y_epaisseur_max:.2f}{unite_corde} à"
           f" {x_epaisseur_max / corde * 100:.2f}% de la corde.")
 
+    # Prendre la valeur de l'épaisseur maximale pour calibrer la fenêtre du graphique.
+    return x_epaisseur_max, y_epaisseur_max
+
+
+# ================================================================================================
+# Fonction qui affiche le profil sur un graphique
+def tracer_graphique(corde, unite_corde, type_de_profil, x_c,
+                     tableau_extrados, tableau_intrados, x_epaisseur_max, y_epaisseur_max):
+    x_extrados = [(tableau_extrados[i][0]) for i in range(len(x_c))]
+    y_extrados = [(tableau_extrados[i][1]) for i in range(len(x_c))]
+
+    x_intrados = [(tableau_intrados[i][0]) for i in range(len(x_c))]
+    y_intrados = [(tableau_intrados[i][1]) for i in range(len(x_c))]
+
+    plt.rcParams['font.size'] = 14
+    plt.rcParams['figure.autolayout'] = True
+
+    # La ligne suivante permet d'écraser l'axe vertical afin de mieux se rendre compte de l'épaisseur du profil.
+    plt.ylim(- corde * 0.5, corde * 0.5)
+    plt.rcParams['figure.dpi'] = 100
+    plt.rcParams['lines.linestyle'] = '-'
+
+    plt.plot(x_extrados, y_extrados, color='red', label='extrados')
+    plt.plot(x_intrados, y_intrados, color='green', label='intrados')
+    plt.scatter(x_epaisseur_max, y_epaisseur_max, color='blue',
+                label=f"Point d'épaisseur maximale : x = {x_epaisseur_max:.2f}ft y = {y_epaisseur_max:.2f}ft")
+
+    plt.xlabel(f"Longueur du profil en {unite_corde}")
+    plt.ylabel("Epaisseur du profil")
+    plt.title(f"Graphique du profil {type_de_profil}")
+    plt.grid()
+    plt.legend()
+    plt.show()
+
 
 # ================================================================================================
 # Fonction principale
@@ -124,7 +158,11 @@ def profil_naca():
 
     tableau_extrados, tableau_intrados = creer_tableaux_extrados_intrados(corde, t, x_c)
 
-    afficher_informations_profil(type_de_profil, corde, unite_corde, tableau_extrados)
+    x_epaisseur_max, y_epaisseur_max = (
+        afficher_informations_profil(type_de_profil, corde, unite_corde, tableau_extrados))
+
+    tracer_graphique(corde, unite_corde, type_de_profil, x_c,
+                     tableau_extrados, tableau_intrados, x_epaisseur_max, y_epaisseur_max)
 
 
 # ================================================================================================
