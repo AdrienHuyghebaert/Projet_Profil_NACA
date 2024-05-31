@@ -1,7 +1,7 @@
 # ================================================================================================
 # Auteur: Adrien HUYGHEBAERT
 # Date: 1 juin 2024
-# Générer un profil NACA symétriques à 4 chiffres (NACA00XX)
+# Générer un profil NACA symétrique à 4 chiffres (NACA00XX)
 # ================================================================================================
 
 # Importation des modules
@@ -30,7 +30,7 @@ def entrees_utilisateur():
 
     while True:
         try:
-            corde = float(input("\nVeuillez rentrer la valeur de la corde de votre profil (en chiffre) :\n"))
+            corde = float(input("\nVeuillez rentrer la valeur de la corde de votre profil (en chiffres) :\n"))
             unite_corde = str(input("\nVeuillez rentrer son unité (exemple : ft ou m) :\n"))
             if isinstance(corde, float) and isinstance(unite_corde, str):
                 break
