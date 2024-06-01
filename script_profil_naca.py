@@ -49,7 +49,7 @@ def entrees_utilisateur():
     print(f"\nPour vos {nombre_points} points, souhaitez-vous avoir une distribution linéaire\n"
           f"ou bien selon la transformée de GLAUERT ?\n"
           f"Cette transformation est de la forme 'x_c = 0.5*(1-cos(a))' avec :\n"
-          f"a qui varie de 0 à 1 et x_c la coordonnée adimensionnelle des points qui varie de 0 à 1.\n")
+          f"x_c la coordonnée adimensionnelle des points qui varie de 0 à 1 et a qui varie de 0 à 1.\n")
     while True:
         distribution = input("Veuillez rentrer 'lineaire' ou 'glauert' pour choisir votre distribution : \n")
         if distribution in ['lineaire', 'glauert']:
@@ -122,7 +122,7 @@ def tracer_graphique(corde, unite_corde, type_de_profil, x_c,
     plt.rcParams['font.size'] = 14
     plt.rcParams['figure.autolayout'] = True
 
-    # La ligne suivante permet d'écraser l'axe vertical afin de mieux se rendre compte de l'épaisseur du profil.
+    # La ligne suivante permet "d'écraser" l'axe vertical afin de mieux se rendre compte de l'épaisseur du profil.
     plt.ylim(- corde * 0.5, corde * 0.5)
     plt.rcParams['figure.dpi'] = 100
     plt.rcParams['lines.linestyle'] = '-'
@@ -148,7 +148,7 @@ def profil_naca():
 
     # Récupération des deux derniers chiffres du profil NACA
     # qui correspondent à l'épaisseur maximale du profil.
-    # t correspond a son pourcentage.
+    # t correspond à son pourcentage.
     t = int(type_de_profil[-2:]) / 100
 
     if distribution == 'glauert':
