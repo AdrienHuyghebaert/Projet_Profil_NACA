@@ -4,6 +4,7 @@
 # Générer un profil NACA symétrique à 4 chiffres (NACA00XX)
 # ================================================================================================
 
+
 # Importation des modules
 
 import numpy as np
