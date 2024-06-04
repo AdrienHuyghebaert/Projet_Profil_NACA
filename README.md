@@ -1,5 +1,5 @@
 ## Objectif du code :
-Ce script a pour but de générer un profil NACA symétrique à 4 chiffres ainsi que de donner l'épaisseur maximale ainsi que sa position en pourcentage de corde.
+Ce script a pour but de générer un profil NACA symétrique à 4 chiffres et donner l'épaisseur maximale ainsi que sa position en pourcentage de corde.
 
 ## Comment utiliser le code :
 L'utilisateur doit seulement rentrer les informations nécéssaires à la génération du profil : 
