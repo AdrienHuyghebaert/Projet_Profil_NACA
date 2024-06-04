@@ -102,7 +102,7 @@ def afficher_informations_profil(type_de_profil, corde, unite_corde, tableau_ext
     print("\n\n\n\n\n\n")
     print(f"\nVotre profil : {type_de_profil}")
     print(f"La corde de votre profil : {corde}{unite_corde}")
-    print(f"L'épaisseur maximale du profil est de {2*y_epaisseur_max:.2f}{unite_corde} à"
+    print(f"L'épaisseur maximale du profil est de {2 * y_epaisseur_max:.2f}{unite_corde} à"
           f" {x_epaisseur_max / corde * 100:.2f}% de la corde.")
 
     # Prendre la valeur de l'épaisseur maximale pour calibrer la fenêtre du graphique.
@@ -129,8 +129,8 @@ def tracer_graphique(corde, unite_corde, type_de_profil, x_c,
 
     plt.plot(x_extrados, y_extrados, color='red', label='extrados')
     plt.plot(x_intrados, y_intrados, color='green', label='intrados')
-    plt.scatter(x_epaisseur_max, y_epaisseur_max, color='blue',
-                label=f"Point d'épaisseur maximale : x = {x_epaisseur_max:.2f}{unite_corde} y = {y_epaisseur_max:.2f}{unite_corde}")
+    plt.scatter(x_epaisseur_max, y_epaisseur_max, color='blue', label=f"Point d'épaisseur maximale :"
+                                                                      f" x = {x_epaisseur_max:.2f}{unite_corde} y = {y_epaisseur_max:.2f}{unite_corde}")
 
     plt.xlabel(f"Longueur du profil en {unite_corde}")
     plt.ylabel("Epaisseur du profil")
